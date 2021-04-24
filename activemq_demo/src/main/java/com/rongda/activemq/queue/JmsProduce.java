@@ -6,7 +6,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import javax.jms.*;
 
 /**
- * 消息的生产者
+ * 消息的生产者 (队列 queue)
  * @author lunrongda
  * @create 2021-04-12 23:11
  */
