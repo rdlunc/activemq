@@ -6,6 +6,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import javax.jms.*;
 
 /**
+ * 消息的生产者
  * @author lunrongda
  * @create 2021-04-12 23:11
  */
@@ -30,7 +31,7 @@ public class JmsProduce {
         //5.创建消息的生产者
         MessageProducer messageProducer = session.createProducer(queue);
         //6.通过使用messageProducer生产3条消息发送到MQ的队列里面
-        for (int i = 1; i <=3 ; i++) {
+        for (int i = 1; i <=6 ; i++) {
             //7.创建消息
             TextMessage textMessage = session.createTextMessage("msg ---> " + i); //可理解为一个字符串
             //8.通过messageProducer发送给 MQ
