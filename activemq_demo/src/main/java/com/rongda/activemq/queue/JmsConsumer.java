@@ -29,7 +29,12 @@ public class JmsConsumer {
         //5.创建消费者
         MessageConsumer messageConsumer = session.createConsumer(queue);
         while(true){
-            TextMessage textMessage = (TextMessage)messageConsumer.receive();
+            //receive()方法是一直等待，“不见不散”。
+            //TextMessage textMessage = (TextMessage)messageConsumer.receive();
+
+            //receive(毫秒)方法是等待多少毫秒后，还没有我就走。
+            TextMessage textMessage = (TextMessage)messageConsumer.receive(4000L);
+
             if (null != textMessage){
                 System.out.println("============> 消息者接收消息： " + textMessage.getText());
             } else {
