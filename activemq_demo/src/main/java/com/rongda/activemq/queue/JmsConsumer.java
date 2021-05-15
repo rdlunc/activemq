@@ -67,6 +67,15 @@ public class JmsConsumer {
                         e.printStackTrace();
                     }
                 }
+
+                if (message != null && message instanceof MapMessage){
+                    MapMessage mapMessage = (MapMessage)message;
+                    try {
+                        log.info("*********》》》 消息者接收消息： " + mapMessage.getInt("k1"));
+                    } catch (JMSException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
         System.in.read();
