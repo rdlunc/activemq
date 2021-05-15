@@ -14,7 +14,7 @@ import java.io.IOException;
 @Slf4j
 public class JmsConsumer2 {
 
-    public static final String ACTIVEMQ_URL = "tcp://192.168.1.106:61616";
+    public static final String ACTIVEMQ_URL = "tcp://192.168.10.106:61616";
     private static final String QUEUE_NAME = "queue01";
 
     public static void main(String[] args) throws JMSException, IOException {
@@ -44,6 +44,15 @@ public class JmsConsumer2 {
                     TextMessage textMessage = (TextMessage)message;
                     try {
                         log.info("*********》》》 消息者接收消息： " + textMessage.getText());
+                    } catch (JMSException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (message != null && message instanceof MapMessage){
+                    MapMessage mapMessage = (MapMessage)message;
+                    try {
+                        log.info("*********》》》 消息者接收消息： " + mapMessage.getInt("k1"));
                     } catch (JMSException e) {
                         e.printStackTrace();
                     }
