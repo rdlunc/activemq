@@ -34,6 +34,10 @@ public class JmsProduce {
         for (int i = 1; i <=3 ; i++) {
             //7.创建消息
             TextMessage textMessage = session.createTextMessage("msg ---> " + i); //可理解为一个字符串
+            //设置消息属性（给i是偶数的消息，添加vip销售属性）
+            if(i % 2 == 0){
+                textMessage.setBooleanProperty("vip", true);
+            }
             //8.通过messageProducer发送给 MQ
             messageProducer.send(textMessage);
 
