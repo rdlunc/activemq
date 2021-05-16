@@ -13,7 +13,7 @@ import javax.jms.*;
 @Slf4j
 public class JmsProduce {
 
-    public static final String ACTIVEMQ_URL = "tcp://192.168.10.106:61616";
+    public static final String ACTIVEMQ_URL = "tcp://192.168.1.106:61616";
     private static final String QUEUE_NAME = "queue01";
 
     public static void main(String[] args) throws JMSException {
@@ -30,6 +30,11 @@ public class JmsProduce {
         Queue queue = session.createQueue(QUEUE_NAME);
         //5.创建消息的生产者
         MessageProducer messageProducer = session.createProducer(queue);
+
+        //生产的消费是否持久化
+        //messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT); //非持久化
+        messageProducer.setDeliveryMode(DeliveryMode.PERSISTENT); //持久化 (默认的)
+
         //6.通过使用messageProducer生产3条消息发送到MQ的队列里面
         for (int i = 1; i <=3 ; i++) {
             //7.创建消息
@@ -41,9 +46,9 @@ public class JmsProduce {
             //8.通过messageProducer发送给 MQ
             messageProducer.send(textMessage);
 
-            MapMessage mapMessage = session.createMapMessage();
-            mapMessage.setInt("k1", i );
-            messageProducer.send(mapMessage);
+//            MapMessage mapMessage = session.createMapMessage();
+//            mapMessage.setInt("k1", i );
+//            messageProducer.send(mapMessage);
         }
         //9.关闭资源
         messageProducer.close();
