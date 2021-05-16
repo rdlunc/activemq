@@ -44,7 +44,8 @@ public class JmsConsumer_TX {
 
         //3.创建会话session
         //两个参数，第一个是事务 / 第二个是签收
-        Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
+        Session session = connection.createSession(true, Session.CLIENT_ACKNOWLEDGE);
+//        Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
 //        Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
 
         //4.创建目的地（具体是队列queue还是主题topic）
@@ -68,7 +69,7 @@ public class JmsConsumer_TX {
                         log.info("*********》》》 TX消息者接收消息属性： " + textMessage.getBooleanProperty("vip"));
 
                         textMessage.acknowledge();
-//                        session.commit();
+                        session.commit();
 
                     } catch (JMSException e) {
                         e.printStackTrace();
