@@ -25,7 +25,9 @@ public class JmsProduce_TX {
 
         //3.创建会话session
         //两个参数，第一个是事务 / 第二个是签收
-        Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+//        Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
+
         //4.创建目的地（具体是队列queue还是主题topic）
         Queue queue = session.createQueue(QUEUE_NAME);
         //5.创建消息的生产者
@@ -48,7 +50,7 @@ public class JmsProduce_TX {
         }
         //9.关闭资源
         messageProducer.close();
-        session.commit();
+//        session.commit();
         session.close();
         connection.close();
         log.info("====> TX消息发布到MQ完成 " );
