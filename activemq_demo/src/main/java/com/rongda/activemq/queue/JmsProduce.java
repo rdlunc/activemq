@@ -13,7 +13,8 @@ import javax.jms.*;
 @Slf4j
 public class JmsProduce {
 
-    public static final String ACTIVEMQ_URL = "tcp://192.168.1.106:61616";
+//    public static final String ACTIVEMQ_URL = "tcp://192.168.1.106:61616";
+    public static final String ACTIVEMQ_URL = "tcp://localhost:61616";
     private static final String QUEUE_NAME = "queue01";
 
     public static void main(String[] args) throws JMSException {
