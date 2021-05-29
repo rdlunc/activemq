@@ -17,7 +17,7 @@
         <property name="connectionFactory">
             <!-- 真正可以产生Connection的ConnectionFactory,由对应的JMS服务厂商提供 -->
             <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-                <property name="brokerURL" value="tcp://192.168.1.106:61616"/>
+                <property name="brokerURL" value="tcp://192.168.43.106:61616"/>
             </bean>
         </property>
         <property name="maxConnections" value="100"></property>
@@ -28,10 +28,16 @@
         <constructor-arg index="0" value="spring-active-queue"/>
     </bean>
 
+    <!-- 这个是主题，订阅与发布 -->
+    <bean id="destinationTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg index="0" value="spring-active-topic"/>
+    </bean>
+
     <!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 -->
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="jmsFactory"/>
-        <property name="defaultDestination" ref="destinationQueue"/>
+<!--        <property name="defaultDestination" ref="destinationQueue"/>-->
+        <property name="defaultDestination" ref="destinationTopic"/>
         <property name="messageConverter">
             <bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
         </property>
